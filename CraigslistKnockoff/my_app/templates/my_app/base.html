@@ -1,11 +1,78 @@
-<!DOCTYPE html>
+{% load staticfiles %}
+{% load static %}
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>CraigslistKnockoff List</title>
+    <title>CraigslistKnockoff</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{% static "my_app/style.css" %}">
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    >
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+<nav>
+    <div class="container nav-wrapper">
+        <a href="{% url 'my_app:home' %}" class="brand-logo">CraigslistKnockoff</a>
+        <ul id="nav-mobile" class="right">
+            <li><a href="{% url 'my_app:home' %}">Home</a></li>
+        </ul>
+    </div>
+</nav>
+
 <body>
-<h2>Testing to see if this works!</h2>
+    <div class="container">
+        <h3 style="text-align: center">
+        What do you want to search for on CraigslistKnockoff List?
+        </h3>
+        <div class="row">
+            <div class="col s4">
+                <!-- Promo Content 1 goes here -->
+                <div class="center">
+                    <i class="large material-icons" style="color: #EE6E73">
+                        flash_on
+                    </i>
+                    <p style="color: #EE6E73">Fast craigslist web scraper</p>
+                    <p class="light center">Scrape away right here with a beautiful GUI</p>
+                </div>
+            </div>
+            <div class="col s4">
+                <!-- Promo Content 2 goes here -->
+                <div class="center">
+                    <i class="large material-icons" style="color: orange">camera</i>
+                    <p style="color: orange">Filter your searches</p>
+                    <p class="light center">
+                        We built in functionality to filter based on pricing.
+                    </p>
+                </div>
+            </div>
+            <div class="col s4">
+                <!-- Promo Content 3 goes here -->
+                <div class="center">
+                    <i class="large material-icons" style="color: blue">chrome_reader_mode</i>
+                    <p style="color: blue">A much sexier front-end to Craigslist</p>
+                    <p class="light center">We built this with LUV</p> 
+                </div>
+            </div>
+        </div>
+        <form method="GET" action="{% url 'my_app:new_search' %}">
+            {% if search %}
+                 <input type="text" name="search_text" placeholder="{{search | title}}"}>
+            {% else %} <input type="text" name="search_text" placeholder="SEARCH">
+            {% endif %}
+            <button class="btn waves-effect waves-light">
+                SEND
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+<script scr="ttps://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
 
